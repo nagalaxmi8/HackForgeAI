@@ -1,5 +1,6 @@
-import json
 from services.gemini_service import ask_gemini
+from services.json_parser import parse_json_response
+from services.error_handler import handle_json_error
 
 
 def generate_tasks(
@@ -9,7 +10,7 @@ def generate_tasks(
     deadline_days
 ):
     prompt = f"""
-You are an expert hackathon mentor.
+You are a hackathon project manager.
 
 Project Idea:
 {project_idea}
@@ -23,26 +24,30 @@ Skills:
 Deadline:
 {deadline_days} days.
 
-Divide the work among exactly {team_size} team members.
+IMPORTANT:
+- This is a hackathon MVP.
+- Distribute work fairly among all team members.
+- If team_size = 1, assign all work to one person.
+- If team_size > 3, create additional roles when necessary.
+- Tasks should be realistic and achievable.
+- Avoid enterprise-level tasks.
 
-Return ONLY valid JSON:
+Return ONLY valid JSON in this format:
 
 {{
     "member_1": [],
     "member_2": [],
-    "member_3": []
+    "...": []
 }}
 
-Do not return markdown.
+No markdown.
 Return only JSON.
 """
 
     response = ask_gemini(prompt)
 
     try:
-        return json.loads(response)
-    except Exception:
-        return {
-            "error": "Invalid JSON from Gemini",
-            "raw_response": response
-        }
+        return parse_json_response(response)
+
+    except Exception as e:
+        return handle_json_error(e, response)

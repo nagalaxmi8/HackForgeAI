@@ -44,6 +44,8 @@ IMPORTANT RULES:
 - Assume only an MVP needs to be built.
 - Recommendations must be practical.
 - Suggest only features that can realistically be built within the deadline.
+- If the project is related to hackathon planning, project management, or agentic AI systems, evaluate it in that context.
+- Do not assume the project is a Government Tender platform unless explicitly mentioned.
 - No markdown.
 - Do not use ```json.
 - Return only JSON.

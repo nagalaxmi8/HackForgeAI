@@ -1,5 +1,6 @@
-import json
 from services.gemini_service import ask_gemini
+from services.json_parser import parse_json_response
+from services.error_handler import handle_json_error
 
 
 def generate_roadmap(
@@ -23,31 +24,32 @@ Skills:
 Deadline:
 {deadline_days} days.
 
-Create a day-wise roadmap.
+Create a realistic day-wise roadmap.
 
-Return ONLY valid JSON:
+IMPORTANT:
+- Adapt the roadmap to the number of days.
+- If the deadline is short, prioritize MVP.
+- If the deadline is long, include planning, testing, and polishing phases.
+- Generate a roadmap for ALL days.
+
+Return ONLY JSON.
+
+Example:
 
 {{
     "day_1": [],
     "day_2": [],
-    "day_3": []
+    "...": []
 }}
 
-Do not return markdown.
-Do not use ```json.
+No markdown.
 Return only JSON.
 """
 
     response = ask_gemini(prompt)
 
-    response = response.replace("```json", "")
-    response = response.replace("```", "")
-    response = response.strip()
-
     try:
-        return json.loads(response)
-    except Exception:
-        return {
-            "error": "Invalid JSON from Gemini",
-            "raw_response": response
-        }
+        return parse_json_response(response)
+
+    except Exception as e:
+        return handle_json_error(e, response)
