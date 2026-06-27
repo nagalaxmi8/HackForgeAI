@@ -12,7 +12,7 @@ def generate_architecture(
     prompt = f"""
 You are a senior software architect and hackathon mentor.
 
-Design an MVP architecture for this hackathon project.
+Design a simple MVP architecture for this hackathon project.
 
 Project Idea:
 {project_idea}
@@ -26,22 +26,7 @@ Skills:
 Deadline:
 {deadline_days} days.
 
-IMPORTANT:
-- This is a hackathon MVP, not a production system.
-- Prefer simple technologies and fast implementation.
-- Prefer APIs over training custom ML models.
-- Prefer monolithic architecture over microservices.
-- Avoid unnecessary complexity.
-
-Do NOT suggest:
-- Training custom models
-- Kubernetes
-- Microservices
-- Message queues
-- Complex databases
-- Docker unless absolutely necessary
-
-Return ONLY valid JSON in this format:
+Return ONLY valid JSON in this exact format:
 
 {{
     "frontend": "",
@@ -52,16 +37,40 @@ Return ONLY valid JSON in this format:
     "flow": []
 }}
 
-Where:
-- frontend = recommended frontend technology
-- backend = recommended backend technology
-- database = recommended database
-- ai_model = recommended AI model/API
-- deployment = recommended deployment method
-- flow = step-by-step system flow.
+IMPORTANT RULES:
 
-No markdown.
-Do not use ```json.
+- Return ONLY valid JSON.
+- Do NOT return markdown.
+- Do NOT use ```json.
+- Design ONLY for a hackathon MVP.
+- Prefer simple technologies.
+- Prefer APIs over training custom models.
+- Prefer monolithic architecture.
+- Avoid unnecessary complexity.
+- Do NOT recommend Kubernetes, Microservices, Docker, or Message Queues.
+
+OUTPUT LIMITS:
+
+- frontend: One technology only.
+- backend: One technology only.
+- database: One technology only.
+- ai_model: One model or API only.
+- deployment: One platform only.
+- flow: Maximum 5 steps.
+
+FLOW RULES:
+
+- Each step must contain fewer than 5 words.
+- Keep steps simple.
+- Example:
+  [
+    "User Input",
+    "React UI",
+    "FastAPI",
+    "Gemini API",
+    "Results"
+  ]
+
 Return only JSON.
 """
 

@@ -10,7 +10,9 @@ def generate_tasks(
     deadline_days
 ):
     prompt = f"""
-You are a hackathon project manager.
+You are a senior hackathon project manager.
+
+Create a fair task allocation for this hackathon MVP.
 
 Project Idea:
 {project_idea}
@@ -24,14 +26,6 @@ Skills:
 Deadline:
 {deadline_days} days.
 
-IMPORTANT:
-- This is a hackathon MVP.
-- Distribute work fairly among all team members.
-- If team_size = 1, assign all work to one person.
-- If team_size > 3, create additional roles when necessary.
-- Tasks should be realistic and achievable.
-- Avoid enterprise-level tasks.
-
 Return ONLY valid JSON in this format:
 
 {{
@@ -40,7 +34,48 @@ Return ONLY valid JSON in this format:
     "...": []
 }}
 
-No markdown.
+IMPORTANT RULES:
+
+- Return ONLY valid JSON.
+- Do NOT return markdown.
+- Do NOT use ```json.
+- Assign work equally among team members.
+- If team_size = 1, assign all work to one member.
+- If team_size > 3, create member_4, member_5, etc.
+- Focus only on MVP tasks.
+- Avoid enterprise-level tasks.
+
+OUTPUT LIMITS:
+
+- Maximum 3 tasks per member.
+- Every task must contain fewer than 8 words.
+- Use short action phrases only.
+- Do NOT include:
+  - Day numbers
+  - Time estimates
+  - Explanations
+  - Subtasks
+
+Example:
+
+{{
+  "member_1": [
+    "Setup React",
+    "Build UI",
+    "Connect APIs"
+  ],
+  "member_2": [
+    "Create backend",
+    "Gemini integration",
+    "Testing"
+  ],
+  "member_3": [
+    "Prompt tuning",
+    "Deployment",
+    "Presentation"
+  ]
+}}
+
 Return only JSON.
 """
 

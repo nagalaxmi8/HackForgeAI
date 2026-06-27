@@ -12,7 +12,7 @@ def analyze_feasibility(
     prompt = f"""
 You are a senior hackathon mentor.
 
-Evaluate this project ONLY as a hackathon MVP (Proof of Concept).
+Evaluate this project ONLY as a Hackathon MVP (Proof of Concept).
 
 Project Idea:
 {project_idea}
@@ -26,7 +26,7 @@ Skills:
 Deadline:
 {deadline_days} days.
 
-Return ONLY valid JSON in this format:
+Return ONLY valid JSON in this exact format:
 
 {{
     "score": 0,
@@ -38,22 +38,36 @@ Return ONLY valid JSON in this format:
 }}
 
 IMPORTANT RULES:
-- score MUST be an integer between 0 and 100.
-- Do NOT return scores like 7 or 8.
-- Example scores: 75, 60, 90.
+
+- Return ONLY valid JSON.
+- Do NOT return markdown.
+- Do NOT use ```json.
+- Do NOT explain your reasoning.
 - Assume only an MVP needs to be built.
-- Recommendations must be practical.
-- Suggest only features that can realistically be built within the deadline.
-- If the project is related to hackathon planning, project management, or agentic AI systems, evaluate it in that context.
-- Do not assume the project is a Government Tender platform unless explicitly mentioned.
-- No markdown.
-- Do not use ```json.
-- Return only JSON.
+- Evaluate ONLY for a hackathon.
+
+OUTPUT LIMITS:
+
+- score: Integer between 0 and 100.
+- complexity: One word only (Low, Medium, High).
+- pros: Maximum 3 points.
+- cons: Maximum 3 points.
+- mvp_features: Maximum 5 features.
+- recommendation: Maximum 2 short sentences.
+
+WRITING RULES:
+
+- Every bullet must contain fewer than 10 words.
+- Keep every sentence concise.
+- Avoid paragraphs.
+- Avoid repetition.
+- Use simple language.
 
 Scoring Guide:
+
 90-100 : Easily achievable MVP.
-70-89 : Achievable with good planning.
-50-69 : Achievable if scope is reduced.
+70-89 : Achievable with planning.
+50-69 : Reduce scope.
 30-49 : Very difficult.
 0-29 : Not realistic.
 """
