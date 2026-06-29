@@ -1,7 +1,7 @@
+
 # HackForge AI – Autonomous Project Feasibility & Execution Planner
 
 ## Project Overview
-
 HackForge AI is an Agentic AI platform designed to help hackathon teams and software development teams transform project ideas into actionable execution plans.
 
 The platform acts as an AI-powered project planning assistant that analyzes project feasibility, recommends software architecture, allocates tasks among team members, generates development roadmaps, and identifies potential risks before implementation begins.
@@ -29,40 +29,10 @@ HackForge AI addresses this gap by providing an AI-powered project planning syst
 
 # High-Level Architecture
 
-```text
-                        User
-                          │
-                          ▼
-                 React Frontend (Vite)
-                          │
-                    REST API Request
-                          │
-                          ▼
-                  FastAPI Backend
-                          │
-                          ▼
-                    Planner Agent
-                          │
- ┌─────────────────────────────────────────┐
- │                                         │
- │   Feasibility Analysis Agent            │
- │   Architecture Recommendation Agent     │
- │   Task Allocation Agent                 │
- │   Roadmap Generation Agent              │
- │   Risk Analysis Agent                   │
- │                                         │
- └─────────────────────────────────────────┘
-                          │
-                          ▼
-                    Gemini API (LLM)
-                          │
-                          ▼
-               Structured JSON Response
-                          │
-                          ▼
-                   React Dashboard
-```
+![HackForge AI Architecture](architecture.png)
+**Figure 1:** High-Level Architecture of HackForge AI showing the flow from user input through the Planner Agent and specialized AI agents to the interactive dashboard.
 
+---
 ---
 
 # System Components
